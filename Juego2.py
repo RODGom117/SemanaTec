@@ -15,10 +15,26 @@ def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
 
+#Función para regresar la comida al centro si se sale del tablero
+def foodReturn(x, y):
+    food.x = x
+    food.y = y
+
+#Función para que la comida se mueva al azar
+def moveFood():
+    if inside(food):
+        food.x += randrange(-1, 2) *10
+        food.y += randrange(-1, 2) *10
+    else:
+        foodReturn(0,0)
+
+
+
 def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
     head.move(aim)
+    moveFood()
 
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
