@@ -58,9 +58,11 @@ def move():
 
     for target in targets:
         if not inside(target):
-            return
+            # Se generan nuevo targets
+            target.x = 200 
+            target.y = randrange(-150,150) 
 
-    ontimer(move, 50)
+    ontimer(move, 15)
 
 setup(420, 420, 370, 0)
 hideturtle()
