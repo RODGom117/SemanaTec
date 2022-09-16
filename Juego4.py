@@ -39,11 +39,12 @@ def move():
         target = vector(200, y)
         targets.append(target)
 
+    #Se modifica la velocidad de los objetivos
     for target in targets:
-        target.x -= 0.5
-
+        target.x -= 0.8
+    # Se modifica la velocidad del proyectil
     if inside(ball):
-        speed.y -= 0.35
+        speed.y -= 0.5
         ball.move(speed)
 
     dupe = targets.copy()

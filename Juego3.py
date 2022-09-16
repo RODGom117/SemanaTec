@@ -121,7 +121,19 @@ def move():
                 vector(0, 5),
                 vector(0, -5),
             ]
-            plan = choice(options)
+
+            # Metodos para hacer más "listos" a los fantasmas
+            if pacman.x > point.x:
+                if pacman.y > point.y:
+                    plan = options[0] and options[1]
+                else:
+                    plan = options[0] and options[3]
+            else:
+                if pacman.y > point.y:
+                    plan = options[1] and options[2]
+                else:
+                    plan = options[1] and options[3]
+
             course.x = plan.x
             course.y = plan.y
 

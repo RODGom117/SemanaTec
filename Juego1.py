@@ -21,9 +21,19 @@ def square(start, end):
 
     end_fill()
 
+#Se la programó la función para crear un circulo
 def circle(start, end):
     "Draw circle from start to end."
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    for i in range(37):
+        forward(end.x - start.x)
+        left(10)
+
+    end_fill()
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
@@ -59,6 +69,8 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+#Se agrego el color morado
+onkey(lambda: color('purple'), 'P')
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
