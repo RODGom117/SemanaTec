@@ -90,7 +90,7 @@ tracer(False)
 
 #Metodo para acomodar el contador de taps en panatalla 
 show.goto(0, 200)
-show.write(state['Taps'], font=('Arial', 30, 'normal')) 
+show.write(state['Taps'], font=('Arial', 20, 'normal')) 
 
 onscreenclick(tap)
 draw()
