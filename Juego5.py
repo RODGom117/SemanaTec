@@ -3,9 +3,18 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
-state = {'mark': None}
+
+#Hemos cambiado los númeor por letras aleatorias
+tiles = ["D", "H", "S", "g", "J", "G", "p", "N", "t", "s", 
+         "z", "C", "V", "F", "d", "a", "T", "y", "u", "o",
+         "f", "R", "A", "Y", "E", "O", "c", "h", "e", "r", 
+         "j", "U"] * 2
+
+#Código que permite contar cuantos taps hay
+state = {'mark': None, 'Taps': 1}
 hide = [True] * 64
+
+show = Turtle(visible=False)
 
 def square(x, y):
     "Draw white square with black outline at (x, y)."
@@ -31,6 +40,11 @@ def tap(x, y):
     "Update mark and hidden tiles based on tap."
     spot = index(x, y)
     mark = state['mark']
+    show.undo()
+
+    # Metodo para mostrar el contador de taps inicial en pantalla y sumarlos
+    show.write(state['Taps'], font=('Arial', 30, 'normal'))
+    state['Taps'] += 1
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
@@ -56,18 +70,28 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        #Metodos para centrar y alinear los caracteres en las casillas
+        goto(x + 25.5, y + 5)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align="center", font=('Arial', 30, 'normal'))
 
-    update()
-    ontimer(draw, 100)
+    #Método para detectar cuando todas las casillas han sido destapadas
+    if not any(hide):
+        print("Todos los cuadros han sido destapados!!")
+    else:
+        update()
+        ontimer(draw, 100)
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(420, 600, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
+
+#Metodo para acomodar el contador de taps en panatalla 
+show.goto(0, 200)
+show.write(state['Taps'], font=('Arial', 30, 'normal')) 
+
 onscreenclick(tap)
 draw()
 done()
